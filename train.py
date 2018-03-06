@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import os
 
 import sys
@@ -28,7 +29,7 @@ model = modellib.MaskRCNN(mode="training", config=bowl_config,
                           model_dir=MODEL_DIR)
 
 # Which weights to start with?
-init_with = "imagenet"  # imagenet, coco, or last
+init_with = "coco"  # imagenet, coco, or last
 
 if init_with == "imagenet":
     model.load_weights(model.get_imagenet_weights(), by_name=True)
@@ -64,5 +65,5 @@ dataset_val.prepare()
 
 model.train(dataset_train, dataset_val, 
             learning_rate=bowl_config.LEARNING_RATE / 10,
-            epochs=100, 
+            epochs=1, 
             layers="all")
