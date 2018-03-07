@@ -64,6 +64,6 @@ dataset_val.prepare()
 #            layers='heads')
 
 model.train(dataset_train, dataset_val, 
-            learning_rate=bowl_config.LEARNING_RATE / 10,
-            epochs=1, 
+            learning_rate=bowl_config.LEARNING_RATE,
+            epochs=8, 
             layers="all")
