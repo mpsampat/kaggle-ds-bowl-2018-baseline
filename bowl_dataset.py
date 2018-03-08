@@ -35,9 +35,12 @@ class BowlDataset(Dataset):
 
     def load_image(self, image_id):
         info = self.image_info[image_id]
-
-        return cv2.imread(info["path"])
-
+        image = cv2.imread(info["path"])
+        # If grayscale. Convert to RGB for consistency.
+        if image.ndim != 3:
+            image = skimage.color.gray2rgb(image)
+        return image
+        #return cv2.imread(info["path"])
 
     def image_reference(self, image_id):
         """Return the shapes data of the image."""

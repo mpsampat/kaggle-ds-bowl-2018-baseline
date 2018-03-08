@@ -1,5 +1,5 @@
 from config import Config
-
+import numpy as np
 class BowlConfig(Config):
     """Configuration for training on the toy shapes dataset.
     Derives from the base Config class and overrides values specific
@@ -12,7 +12,7 @@ class BowlConfig(Config):
     # GPU because the images are small. Batch size is 8 (GPUs * images/GPU).
     GPU_COUNT = 1
     IMAGES_PER_GPU = 1
-    LEARNING_RATE = 0.01
+    LEARNING_RATE = 0.00005
     # Number of classes (including background)
     NUM_CLASSES = 1 + 1 # background + nuclei
 
@@ -26,16 +26,16 @@ class BowlConfig(Config):
 
     # Reduce training ROIs per image because the images are small and have
     # few objects. Aim to allow ROI sampling to pick 33% positive ROIs.
-    TRAIN_ROIS_PER_IMAGE = 600
+    TRAIN_ROIS_PER_IMAGE = 500
 
-    STEPS_PER_EPOCH = None
+    STEPS_PER_EPOCH = 600
 
     # use small validation steps since the epoch is small
-    VALIDATION_STEPS = 5
-
+    VALIDATION_STEPS = 10
+    MEAN_PIXEL = np.array([0.0, 0.0, 0.0])
     USE_MINI_MASK = False
-
-    MAX_GT_INSTANCES = 256
+    MINI_MASK_SHAPE = (28, 28)	
+    MAX_GT_INSTANCES = 500
 
     DETECTION_MAX_INSTANCES = 512
 
